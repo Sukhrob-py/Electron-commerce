@@ -11,16 +11,16 @@ class ProductSerializer(serializers.ModelSerializer):
             'cost',
             'title',
             'photo',
-            'desc'
+            'desc',
+            'brand',
+            'yuid'
         )
 
     def create(self, validated_data):
-        print(validated_data)
         return super().create(validated_data)
 
     def validate(self, attrs):
         attrs['owner'] = self.context['request'].user
-        print(attrs)
         return attrs
 
     def to_representation(self, instance):

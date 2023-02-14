@@ -1,0 +1,41 @@
+.brands{
+  background-color: rgba(226, 244, 255, 1);
+  padding: 40px 20px;
+  margin: 50px 0 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 30px;
+  &__item{
+    width: 180px;
+    // background-color: aqua;
+    img{
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width:1100px) {
+  .brands{
+    &__item{
+      width: 150px;
+    }
+  }
+}
+@media (max-width:1000px) {
+  .brands{
+    &__item{
+      width: 120px;
+    }
+  }
+}
+@media (max-width:800px) {
+  .brands{
+    flex-wrap: wrap;
+    gap: 50px;
+    row-gap: 20px;
+    &__item{
+      width: 150px;
+    }
+  }
+}

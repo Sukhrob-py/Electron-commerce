@@ -1,0 +1,144 @@
+.sale {
+  width: 100%;
+  background-color: rgb(23, 23, 23);
+  display: flex;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 20px 0 50px;
+  height: 400px;
+  .sale__img {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding-left: 30px;
+    img {
+      width: 600px;
+      object-fit: cover;
+    }
+  }
+  .sale__info {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    button {
+      padding: 12px 25px;
+      background-color: rgba(237, 164, 21, 1);
+      color: #fff;
+      font-size: 14px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+    .sale__title {
+      color: rgba(46, 143, 197, 1);
+      font-size: 40px;
+    }
+    .sale__charactericts {
+      color: #fff;
+      font-size: 18px;
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .sale {
+    .sale__img {
+      img {
+        width: 500px;
+      }
+    }
+  }
+}
+@media (max-width: 1000px) {
+  .sale {
+    .sale__img {
+      img {
+        width: 400px;
+      }
+    }
+    .sale__info {
+      gap: 20px;
+      button {
+        padding: 10px 20px;
+        font-size: 13px;
+        border-radius: 16px;
+      }
+      .sale__title {
+        font-size: 36px;
+      }
+      .sale__charactericts {
+        font-size: 16px;
+      }
+    }
+  }
+}
+@media (max-width: 767px) {
+  .sale {
+    // flex-direction: column;
+    height: 300px;
+    .sale__img {
+      img {
+        width: 300px;
+      }
+    }
+    .sale__info {
+      gap: 20px;
+      button {
+        padding: 10px 20px;
+        font-size: 12px;
+        border-radius: 16px;
+      }
+      .sale__title {
+        font-size: 30px;
+      }
+      .sale__charactericts {
+        font-size: 14px;
+      }
+    }
+  }
+}
+@media (max-width: 676px) {
+  .sale {
+    flex-direction: column;
+    height: auto;
+    gap: 20px;
+    padding: 20px;
+    .sale__img {
+      width: 100%;
+      justify-content: center;
+      padding-left: 0;
+      img {
+        width: 300px;
+      }
+    }
+    .sale__info {
+      width: 100%;
+      gap: 20px;
+      text-align: center;
+      button {
+        padding: 10px 20px;
+        font-size: 12px;
+        border-radius: 16px;
+      }
+      .sale__title {
+        font-size: 30px;
+      }
+      .sale__charactericts {
+        font-size: 14px;
+      }
+    }
+  }
+}
+@media (max-width: 400px) {
+  .sale {
+    .sale__img {
+      img {
+        width: 250px;
+      }
+    }
+  }
+}

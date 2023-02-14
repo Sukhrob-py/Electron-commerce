@@ -1,0 +1,146 @@
+.popular {
+  padding: 10px 0 50px;
+  &__top {
+    padding-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    .popular__title {
+      color: rgba(27, 90, 125, 1);
+      font-size: 26px;
+    }
+    &__right {
+      .categories {
+        display: flex;
+        gap: 10px;
+        button {
+          color: rgba(0, 63, 98, 1);
+          border: 1px solid rgba(0, 63, 98, 1);
+          background-color: transparent;
+          padding: 10px 30px;
+          border-radius: 20px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  .products {
+    width: 100%;
+    height: 650px;
+  }
+}
+
+.swiper2 {
+  width: 100%;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 36px;
+}
+
+.swiper-slide2 {
+  height: calc((100% - 30px) / 2) !important;
+}
+
+.product {
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(182, 182, 182, 1);
+  border-radius: 20px;
+  padding: 8px;
+  .img {
+    width: 160px;
+    margin: 0 auto;
+    img {
+      width: 100%;
+    }
+  }
+  .title {
+    color: rgba(0, 63, 98, 1);
+    font-size: 17px;
+  }
+  .cost {
+    color: rgba(74, 74, 74, 1);
+    font-size: 17px;
+  }
+  .product__links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    gap: 10px;
+    .addcart,
+    .viewmore {
+      background-color: rgba(135, 188, 217, 1);
+      padding: 10px 20px;
+      border-radius: 12px;
+      color: rgba(39, 39, 39, 1);
+    }
+    .viewmore {
+      display: flex;
+      align-items: center;
+      .icon {
+        font-size: 22px;
+      }
+    }
+    .addcart {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      .icon {
+        color: rgba(237, 164, 21, 1);
+      }
+    }
+  }
+}
+
+
+@media (max-width:900px) {
+  .popular{
+    &__top{
+      .popular__title{
+        font-size: 20px;
+      }
+      &__right{
+        .categories{
+          gap: 6px;
+          button{
+            padding: 6px 15px;
+            font-size: 12px;
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width:676px) {
+  .popular{
+    &__top{
+      &__right{
+        // background-color: aqua;
+        width: 230px;
+        overflow-x: scroll;
+        &::-webkit-scrollbar{
+          width: 0;
+        }
+      }
+    }
+  }
+}
+@media (max-width:500px) {
+  .popular{
+    &__top{
+      &__right{
+        // background-color: aqua;
+        width: 150px;
+        .categories{
+          gap: 6px;
+          button{
+            padding: 6px 15px;
+            font-size: 12px;
+          }
+        }
+      }
+    }
+  }
+}
