@@ -1,3 +1,45 @@
-.footer{
-  
+.footer-wrapper{
+  background-color: #E2F4FF;
+  padding: 40px 0;
+  .footer{
+    &-form{
+      display: flex;
+      justify-content: space-between;
+      padding: 30px 70px;
+      background-color: #fff;
+      border-radius: 20px;
+      align-items: center;
+      &-title{
+        .title{
+          color: #1B5A7D;
+          font-size: 28px;
+          font-weight: 700;
+        }
+      }
+      form{
+        width: 380px;
+        display: flex;
+        input{
+          background-color: #EDA415;
+          color: #fff;
+          font-size: 14px;
+          padding: 20px 25px;
+          width: 100%;
+          outline: none;
+          border: none;
+          border-radius: 20px;
+          &::placeholder{
+            color: #fff;
+          }
+          button{
+            width: 50px;
+            .icon{
+              font-size: 20px;
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
 }
