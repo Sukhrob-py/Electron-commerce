@@ -8,32 +8,49 @@ import "swiper/css/grid";
 import "swiper/css/pagination";
 import { Grid, Pagination } from "swiper";
 
+import "./filter.scss";
+
 import Product from "../../assets/product.png";
-
-import "./popular.scss";
-
-function Popular() {
+function Filter() {
   return (
     <div className="container">
-      <div className="popular">
-        <div className="popular__top">
-          <div className="popular__top__left">
-            <h3 className="popular__title">Popular products</h3>
-          </div>
-          <div className="popular__top__right">
-            <div className="categories">
-              <button>Cameras</button>
-              <button>Laptops</button>
-              <button>Phones</button>
-              <button>Tablets</button>
+      <div className="filter">
+        <div className="sidebar">
+          <div className="by-category">
+            <h4 className="title">Categories</h4>
+            <div className="by-category-list">
+              <div className="list-item">
+                <button>All categories</button>
+                <span>10</span>
+              </div>
+              <div className="list-item">
+                <button>Tablet</button>
+                <span>5</span>
+              </div>
+              <div className="list-item">
+                <button>Laptop</button>
+                <span>5</span>
+              </div>
+              <div className="list-item">
+                <button>Headphones</button>
+                <span>15</span>
+              </div>
+              <div className="list-item">
+                <button>Console</button>
+                <span>10</span>
+              </div>
+              <div className="list-item">
+                <button>Other</button>
+                <span>7</span>
+              </div>
             </div>
           </div>
         </div>
         <div className="products">
           <Swiper
-            slidesPerView={4}
+            slidesPerView={3}
             grid={{
-              rows: 2,
+              rows: 3,
             }}
             spaceBetween={20}
             pagination={{
@@ -44,10 +61,10 @@ function Popular() {
             breakpoints={{
               // when window width is >= 320px
               1150: {
-                slidesPerView: 4,
-              },
-              900: {
                 slidesPerView: 3,
+              },
+              850: {
+                slidesPerView: 2,
               },
               585: {
                 slidesPerView: 2,
@@ -55,7 +72,6 @@ function Popular() {
               250: {
                 slidesPerView: 1,
               },
-              
             }}
           >
             <SwiperSlide className="swiper-slide2">
@@ -69,7 +85,7 @@ function Popular() {
                 </p>
                 <div className="product__links">
                   <Link className="addcart">
-                    Add to cart <BsFillCartPlusFill className="icon"/>
+                    Add to cart <BsFillCartPlusFill className="icon" />
                   </Link>
                   <Link className="viewmore" to="detail/yuid">
                     <SlEye className="icon" />
@@ -84,4 +100,4 @@ function Popular() {
   );
 }
 
-export default Popular;
+export default Filter;

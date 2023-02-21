@@ -1,0 +1,346 @@
+.cart {
+  margin: 40px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  .products {
+    width: 65%;
+    .top {
+      display: flex;
+      background-color: #e2f4ff;
+      width: 100%;
+      padding: 10px 30px;
+      h3 {
+        color: #232323;
+        font-size: 20px;
+        font-weight: 400;
+      }
+      .title-img {
+        width: 57%;
+        max-width: 57%;
+      }
+      .quantity {
+        width: 20%;
+      }
+      .subtotal {
+        width: 20%;
+      }
+      .delete {
+        width: 3%;
+      }
+    }
+    .products__list {
+      .cart-product {
+        background-color: #fff;
+        padding: 25px 0;
+        align-items: center;
+        border-bottom: 1px solid #c3c3c3;
+        .title-img {
+          display: flex;
+          align-items: center;
+          gap: 20px;
+          .title {
+            .title__txt {
+              color: #003f62;
+              font-size: 20px;
+              font-weight: 700;
+            }
+            .cost {
+              color: #2f2f2f;
+              font-size: 18px;
+            }
+          }
+          .img {
+            width: 20%;
+            img {
+              width: 100%;
+            }
+          }
+        }
+        .quantity {
+          .quantity__txt {
+            font-size: 18px;
+            color: #2f2f2f;
+          }
+        }
+        .subtotal {
+          .subtotal__txt {
+            font-size: 18px;
+            color: #2f2f2f;
+          }
+        }
+        .delete {
+          .icon {
+            font-size: 20px;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+    .btns {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      button {
+        padding: 18px 30px;
+        font-size: 20px;
+        cursor: pointer;
+        border: none;
+        border-radius: 26px;
+      }
+      .shop {
+        background-color: #eda415;
+        border: 1px solid #eda415;
+        color: #fff;
+      }
+      .clear {
+        background-color: #fff;
+        border: 1px solid #c33131;
+        color: #c33131;
+      }
+    }
+  }
+  .total {
+    width: 35%;
+    background-color: #e2f4ff;
+    .top {
+      h3 {
+        text-align: center;
+        width: 100%;
+      }
+    }
+    .total-wrap {
+      padding: 20px 40px;
+      background-color: #fff;
+      .total-cost {
+        display: flex;
+        justify-content: space-between;
+        p{
+          color: #232323;
+          font-size: 20px;
+        }
+        padding-bottom: 10px;
+        border-bottom: 1px solid #afafaf;
+      }
+    }
+  }
+}
+
+
+@media (max-width:1000px) {
+  .cart{
+    flex-direction: column;
+    gap: 50px;
+    .products{
+      width: 100%;
+    }
+    .total{
+      width: 400px;
+    }
+  }
+}
+
+@media (max-width:700px) {
+  .cart{
+    .products{
+      .top{
+        padding: 6px 20px;
+        h3{
+          font-size: 16px;
+        }
+      }
+      .products__list{
+        .cart-product{
+          .title-img{
+            .title{
+              .title__txt{
+                font-size: 16px;
+              }
+              .cost{
+                font-size: 15px;
+              }
+            }
+          }
+          .quantity{
+            .quantity__txt{
+              font-size: 16px;
+            }
+          }
+          .subtotal{
+            .subtotal__txt{
+              font-size: 16px;
+            }
+          }
+          .delete{
+            .icon{
+              font-size: 16px;
+            }
+          }
+        }
+      }
+      .btns{
+        button{
+          padding: 12px 25px;
+          border-radius: 20px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width:550px) {
+  .cart{
+    .products{
+      .top{
+        padding: 5px 10px;
+        h3{
+          font-size: 14px;
+        }
+      }
+      .products__list{
+        .cart-product{
+          .title-img{
+            .title{
+              .title__txt{
+                font-size: 14px;
+              }
+              .cost{
+                font-size: 13px;
+              }
+            }
+          }
+          .quantity{
+            .quantity__txt{
+              font-size: 14px;
+            }
+          }
+          .subtotal{
+            .subtotal__txt{
+              font-size: 14px;
+            }
+          }
+          .delete{
+            .icon{
+              font-size: 14px;
+            }
+          }
+        }
+      }
+      .btns{
+        button{
+          padding: 10px 20px;
+          border-radius: 16px;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
+@media (max-width:440px) {
+  .cart{
+    .products{
+      .top{
+        padding: 5px 10px;
+        h3{
+          font-size: 13px;
+        }
+      }
+      .products__list{
+        .cart-product{
+          .title-img{
+            gap: 10px;
+            .title{
+              .title__txt{
+                font-size: 13px;
+              }
+              .cost{
+                font-size: 12px;
+              }
+            }
+          }
+          .quantity{
+            .quantity__txt{
+              font-size: 13px;
+            }
+          }
+          .subtotal{
+            .subtotal__txt{
+              font-size: 13px;
+            }
+          }
+          .delete{
+            .icon{
+              font-size: 13px;
+            }
+          }
+        }
+      }
+      .btns{
+        button{
+          padding: 10px 20px;
+          border-radius: 16px;
+          font-size: 14px;
+        }
+      }
+    }
+    .total{
+      width: 280px;
+      .total-wrap{
+        .total-cost{
+          p{
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width:390px) {
+  .cart{
+    .products{
+      .top{
+        padding: 5px 10px;
+        h3{
+          font-size: 11px;
+        }
+      }
+      .products__list{
+        .cart-product{
+          .title-img{
+            .title{
+              .title__txt{
+                font-size: 12px;
+              }
+              .cost{
+                font-size: 11px;
+              }
+            }
+          }
+          .quantity{
+            .quantity__txt{
+              font-size: 13px;
+            }
+          }
+          .subtotal{
+            .subtotal__txt{
+              font-size: 13px;
+            }
+          }
+          .delete{
+            .icon{
+              font-size: 13px;
+            }
+          }
+        }
+      }
+      .btns{
+        button{
+          padding: 8px 16px;
+          border-radius: 14px;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}

@@ -66,7 +66,7 @@ function Nav() {
                 </Link>
               </div>
               <div className="nav-bottom-right__item">
-                <Link>
+                <Link to="/cart">
                   <RiShoppingCart2Line className="icon" />
                   <p className="nav-bottom-right__item">Cart</p>
                 </Link>
@@ -79,9 +79,13 @@ function Nav() {
         <div className="container">
           <div className="nav-links-wrapper">
             <div className="nav-links-left">
-              <Link className="category link">Browse categories</Link>
+              <Link className="category link" to="/filter">
+                Browse categories
+              </Link>
               <div className="links">
-                <Link className="link">Home</Link>
+                <Link className="link" to="/">
+                  Home
+                </Link>
                 <Link className="link">My products</Link>
                 <Link className="link">About us</Link>
               </div>
