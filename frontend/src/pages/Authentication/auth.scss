@@ -1,0 +1,53 @@
+.auth {
+  width: 50%;
+  margin: 120px auto;
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    select{
+      outline: none;
+      padding: 8px;
+      border: 1px solid rgba(0, 63, 98, 1);
+      border-radius: 10px;
+      color: #232323;
+    }
+    input {
+      padding: 10px 20px;
+      border: 1px solid rgba(0, 63, 98, 1);
+      border-radius: 10px;
+      outline: none;
+    }
+    button {
+      padding: 8px;
+      cursor: pointer;
+      border-radius: 10px;
+      font-size: 18px;
+      background-color: rgba(237, 164, 21, 1);
+      color: #fff;
+      border: none;
+    }
+    .link {
+      text-align: center;
+      &__item {
+        color: #232323;
+      }
+    }
+  }
+}
+
+@media (max-width:1000px) {
+  .auth{
+    width: 60%;
+  }
+}
+@media (max-width:800px) {
+  .auth{
+    width: 80%;
+  }
+}
+@media (max-width:500px) {
+  .auth{
+    width: 90%;
+  }
+}

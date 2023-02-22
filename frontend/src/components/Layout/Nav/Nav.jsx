@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-import { CiLocationOn } from "react-icons/ci";
+import { GrLocation } from "react-icons/gr";
 import { FaCartArrowDown } from "react-icons/fa";
 import { GoSearch } from "react-icons/go";
 import { AiOutlineCloseSquare, AiOutlineMenu } from "react-icons/ai";
@@ -27,17 +27,17 @@ function Nav() {
           </div>
           <div className="nav-top__right">
             <div className="nav-top__right__item">
-              <Link className="location">
-                <CiLocationOn className="icon" />
+              <Link className="location" to="/">
+                <GrLocation className="icon" />
               </Link>
               <p className="nav-top__right__item__txt">
-                <Link to="">Our store</Link>
+                <Link to="/">Our store</Link>
               </p>
             </div>
             <div className="nav-top__right__item">
               <FaCartArrowDown className="icon" />
               <p className="nav-top__right__item__txt">
-                <Link>Your orders</Link>
+                <Link to="/">Your orders</Link>
               </p>
             </div>
           </div>
