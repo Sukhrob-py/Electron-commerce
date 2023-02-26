@@ -21,9 +21,20 @@ class FilterProductsApiView(APIView):
     def post(self, request):
         name = request.data.get('name')
         products = Product.objects.filter(title__contains=name)
-        serialized_products = serialize('json', products)
+        products_list = []
+        for i in products:
+            prod_dict = {}
+            prod_dict['yuid'] = str(i.yuid)
+            prod_dict['owner'] = i.owner.email
+            prod_dict['category'] = i.category
+            prod_dict['cost'] = i.cost
+            prod_dict['title'] = i.title
+            prod_dict['photo'] = "http://127.0.0.1:8000/media/"+str(i.photo)
+            prod_dict['desc'] = i.desc
+            prod_dict['brand'] = i.brand
+            products_list.append(prod_dict)
         return Response({
-            'data': serialized_products
+            'data': json.dumps(products_list)
         })
 
 

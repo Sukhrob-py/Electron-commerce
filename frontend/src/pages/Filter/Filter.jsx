@@ -1,18 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { SlEye } from "react-icons/sl";
 import { BsFillCartPlusFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { Grid, Pagination } from "swiper";
 import "swiper/css";
 import "swiper/css/grid";
 import "swiper/css/pagination";
-import { Grid, Pagination } from "swiper";
 
+import { SearchContext } from "../../components/Layout/Nav/Nav";
 import "./filter.scss";
 
 function Filter() {
   const [products, setProducts] = useState("");
   const [quantity, setQuantity] = useState("");
+  let { search, btn } = useContext(SearchContext);
   const API = "http://127.0.0.1:8000/products/products/";
   const API2 = "http://127.0.0.1:8000/products/filter_category/";
   const API3 = "http://127.0.0.1:8000/products/quantity_category/";
@@ -92,6 +94,27 @@ function Filter() {
       window.localStorage.href = "/";
     }
   };
+  const search_name = async (API) => {
+    const res = await fetch(API, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("access"),
+      },
+      body: JSON.stringify({
+        name: search,
+      }),
+    });
+    const data = await res.json();
+    if (res.status == 200 && data) {
+      setProducts(JSON.parse(data.data));
+    } else if (res.status == 401) {
+      window.location.href = "/login";
+    }
+  };
+  if (btn) {
+    search_name("http://127.0.0.1:8000/products/filter/");
+  }
   useEffect(() => {
     popular_products(API);
     category_quantity(API3);
