@@ -111,7 +111,7 @@ function Filter() {
                     valuee = quant[key];
                   }
                   return (
-                    <div className="list-item">
+                    <div className="list-item" key={keyy}>
                       <button
                         onClick={(e) => {
                           filtered_data(API2, e.target.innerText);
@@ -204,7 +204,7 @@ function Filter() {
                     valuee = quant[key];
                   }
                   return (
-                    <div className="list-item">
+                    <div className="list-item" key={keyy}>
                       <button
                         onClick={(e) => {
                           filtered_data(API2, e.target.innerText);
