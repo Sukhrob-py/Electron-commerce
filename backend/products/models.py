@@ -56,7 +56,7 @@ class Product(models.Model):
     category = models.CharField(max_length=50, choices=CATEGORY, default=OTHER)
     cost = models.CharField(max_length=10, null=True)
     title = models.CharField(max_length=50)
-    photo = models.ImageField(upload_to='images/products')
+    photo = models.ImageField(upload_to='images/products',null=True,blank=True)
     desc = models.CharField(max_length=255)
     yuid = models.UUIDField(default=uuid4, editable=False, unique=True)
     brand=models.CharField(max_length=50,choices=BRANDS,default=OTHER)

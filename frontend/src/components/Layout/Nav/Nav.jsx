@@ -15,6 +15,7 @@ import "./nav.scss";
 
 function Nav() {
   const [sidelinks, setSidelinks] = useState(false);
+  const access = localStorage.getItem("access");
   return (
     <div className="nav">
       <div className="nav-top">
@@ -59,7 +60,9 @@ function Nav() {
               <div className="nav-bottom-right__item">
                 <GoSearch className="icon search-icon" />
               </div>
-              <div className="nav-bottom-right__item">
+              <div
+                className={`nav-bottom-right__item ${access ? "dnone" : ""}`}
+              >
                 <Link>
                   <RxPerson className="icon" />
                   <p className="nav-bottom-right__item">Sign in</p>
@@ -86,7 +89,9 @@ function Nav() {
                 <Link className="link" to="/">
                   Home
                 </Link>
-                <Link className="link">My products</Link>
+                <Link className="link" to="/myproducts">
+                  My products
+                </Link>
                 <Link className="link">About us</Link>
               </div>
             </div>

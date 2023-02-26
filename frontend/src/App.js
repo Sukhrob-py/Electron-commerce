@@ -11,6 +11,8 @@ import Signup from "./pages/Authentication/Signup";
 import EmailVerification from "./pages/Authentication/EmailVerification";
 import UsernamePassword from "./pages/Authentication/UsernamePassword";
 import OtherInfos from "./pages/Authentication/OtherInfos";
+import Myproducts from "./pages/Myproducts/Myproducts";
+import UpdateMyProduct from "./pages/UpdateMyPorduct/UpdateMyProduct";
 
 function App() {
   return (
@@ -22,13 +24,15 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/filter" element={<Filter />} />
-              <Route path="/filter/detail/:yuid" element={<Detail />} />
+              <Route path="/detail/:yuid" element={<Detail />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/emailverify" element={<EmailVerification />} />
               <Route path="/usernamepassword" element={<UsernamePassword />} />
               <Route path="/otherinfos" element={<OtherInfos />} />
+              <Route path="/myproducts" element={<Myproducts />} />
+              <Route path="/update/:yuid" element={<UpdateMyProduct />} />
             </Routes>
           </main>
           <Footer />

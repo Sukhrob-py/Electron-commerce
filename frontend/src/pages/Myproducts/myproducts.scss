@@ -1,0 +1,24 @@
+.noproduct {
+  height: 300px;
+}
+
+.myproducts {
+  .products {
+    .swiper2 {
+      .swiper-slide2 {
+        .product {
+          .product__links {
+            .delete {
+              background-color: red;
+              color: #fff;
+            }
+            .update{
+              background-color: green;
+              color: #fff;
+            }
+          }
+        }
+      }
+    }
+  }
+}

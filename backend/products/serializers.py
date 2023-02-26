@@ -18,6 +18,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         return super().create(validated_data)
+    
 
     def validate(self, attrs):
         attrs['owner'] = self.context['request'].user
