@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import "./auth.scss";
 
 function OtherInfos() {
+  const [errorTxt, setError] = useState("");
   const [phone, setPhone] = useState("");
   const [age, setAge] = useState("");
   const [sex, setSex] = useState("");
@@ -22,55 +23,62 @@ function OtherInfos() {
       }),
     });
     const data = await res.json();
-    console.log(data);
     if (data.success == true) {
       localStorage.setItem("access", localStorage.getItem("access_signup"));
       localStorage.removeItem("access_signup");
       window.location.href = "/";
     } else {
-      window.alert(data.message);
+      setError(data.message);
     }
   };
   return (
-    <div className="auth">
-      <form
-        className="form"
-        onSubmit={(e) => {
-          e.preventDefault();
-          set_profile_infos();
-        }}
-      >
-        <input
-          type="text"
-          placeholder="phone number"
-          onChange={(e) => {
-            setPhone(e.target.value);
+    <>
+      <div className={`error-box ${errorTxt ? "dblock" : ""}`}>
+        <h3 className="error-txt">{errorTxt}</h3>
+      </div>
+      <div className="auth">
+        <form
+          className="form"
+          onSubmit={(e) => {
+            e.preventDefault();
+            set_profile_infos();
           }}
-        />
-        <input
-          type="number"
-          placeholder="age"
-          onChange={(e) => {
-            setAge(e.target.value);
-          }}
-        />
-        <select>
-          <option
+        >
+          <input
+            type="text"
+            required
+            placeholder="phone number"
+            onChange={(e) => {
+              setPhone(e.target.value);
+            }}
+          />
+          <input
+            type="number"
+            required
+            placeholder="age"
+            onChange={(e) => {
+              setAge(e.target.value);
+            }}
+          />
+          <select
+            required
             onChange={(e) => {
               setSex(e.target.value);
             }}
-          ></option>
-          <option value="male">male</option>
-          <option value="female">female</option>
-        </select>
-        <button>Finish</button>
-        <div className="link">
-          <Link className="link__item" to="/login">
-            Login
-          </Link>
-        </div>
-      </form>
-    </div>
+          >
+            <option>sex</option>
+            <option value="male">male</option>
+            <option value="female">female</option>
+          </select>
+          <button>Finish</button>
+          <div className="link">
+            <Link className="link__item" to="/login">
+              Login
+            </Link>
+          </div>
+        </form>
+      </div>
+    </>
   );
 }
 

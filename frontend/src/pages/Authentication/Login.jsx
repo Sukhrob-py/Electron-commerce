@@ -6,6 +6,7 @@ import "./auth.scss";
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errorTxt, setError] = useState("");
   const API = "http://127.0.0.1:8000/user/login/";
   const login = async () => {
     const res = await fetch(API, {
@@ -19,7 +20,6 @@ function Login() {
       }),
     });
     const data = await res.json();
-    console.log(data);
     if (data.success) {
       localStorage.setItem("access", data.access);
       localStorage.setItem("refresh", data.refresh);
@@ -28,40 +28,45 @@ function Login() {
       localStorage.setItem("username", data.username);
       window.location.href = "/";
     } else {
-      window.alert("password or username is incorrect");
+      setError("password or username is incorrect!");
     }
   };
   return (
-    <div className="auth">
-      <form
-        className="form"
-        onSubmit={(e) => {
-          e.preventDefault();
-          login();
-        }}
-      >
-        <input
-          type="text"
-          placeholder="username or email or phonenumber"
-          onChange={(e) => {
-            setUsername(e.target.value);
+    <>
+      <div className={`error-box ${errorTxt ? "dblock" : ""}`}>
+        <h3 className="error-txt">{errorTxt}</h3>
+      </div>
+      <div className="auth">
+        <form
+          className="form"
+          onSubmit={(e) => {
+            e.preventDefault();
+            login();
           }}
-        />
-        <input
-          type="password"
-          placeholder="password"
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-        />
-        <button>Login</button>
-        <div className="link">
-          <Link className="link__item" to="/signup">
-            Signup
-          </Link>
-        </div>
-      </form>
-    </div>
+        >
+          <input
+            type="text"
+            placeholder="username or email or phonenumber"
+            onChange={(e) => {
+              setUsername(e.target.value);
+            }}
+          />
+          <input
+            type="password"
+            placeholder="password"
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+          />
+          <button>Login</button>
+          <div className="link">
+            <Link className="link__item" to="/signup">
+              Signup
+            </Link>
+          </div>
+        </form>
+      </div>
+    </>
   );
 }
 

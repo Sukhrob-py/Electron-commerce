@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { SlEye } from "react-icons/sl";
 import { BsFillCartPlusFill } from "react-icons/bs";
@@ -8,9 +8,11 @@ import "swiper/css/grid";
 import "swiper/css/pagination";
 import { Grid, Pagination } from "swiper";
 
+import { SearchContext } from "../../components/Layout/Nav/Nav";
 import "./popular.scss";
 
 function Popular() {
+  let { search, btn } = useContext(SearchContext);
   const [products, setProducts] = useState("");
   const API = "http://127.0.0.1:8000/products/populars/";
   const popular_products = async (API) => {
@@ -28,7 +30,7 @@ function Popular() {
       window.location.href = "/login";
     }
   };
-  const addcart = async (API,yuid) => {
+  const addcart = async (API, yuid) => {
     const res = await fetch(API, {
       method: "POST",
       headers: {
@@ -52,6 +54,27 @@ function Popular() {
       window.localStorage.href = "/";
     }
   };
+  const search_name = async (API) => {
+    const res = await fetch(API, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("access"),
+      },
+      body: JSON.stringify({
+        name: search,
+      }),
+    });
+    const data = await res.json();
+    if (res.status == 200 && data) {
+      setProducts(JSON.parse(data.data));
+    } else if (res.status == 401) {
+      window.location.href = "/login";
+    }
+  };
+  if (btn) {
+    search_name("http://127.0.0.1:8000/products/filter/");
+  }
   useEffect(() => {
     popular_products(API);
   }, []);
@@ -115,7 +138,10 @@ function Popular() {
                         <Link
                           className="addcart"
                           onClick={() => {
-                            addcart("http://127.0.0.1:8000/cart/create/",prod.yuid);
+                            addcart(
+                              "http://127.0.0.1:8000/cart/create/",
+                              prod.yuid
+                            );
                           }}
                         >
                           Add to cart <BsFillCartPlusFill className="icon" />

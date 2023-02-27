@@ -5,6 +5,7 @@ import "./auth.scss";
 
 function EmailVerification() {
   const [code, setCode] = useState("");
+  const [errorTxt, setError] = useState("");
   const API = "http://127.0.0.1:8000/user/verify/";
   const verify = async () => {
     const res = await fetch(API, {
@@ -22,36 +23,40 @@ function EmailVerification() {
       localStorage.setItem("access_signup", data.access);
       window.location.href = "/usernamepassword";
     } else if (res.status == 401) {
-      window.alert(data.detail);
       window.location.href = "/signup";
     } else {
-      window.alert(data.message);
+      setError(data.message);
     }
   };
   return (
-    <div className="auth">
-      <form
-        className="form"
-        onSubmit={(e) => {
-          e.preventDefault();
-          verify();
-        }}
-      >
-        <input
-          type="text"
-          placeholder="code"
-          onChange={(e) => {
-            setCode(e.target.value);
+    <>
+      <div className={`error-box ${errorTxt ? "dblock" : ""}`}>
+        <h3 className="error-txt">{errorTxt}</h3>
+      </div>
+      <div className="auth">
+        <form
+          className="form"
+          onSubmit={(e) => {
+            e.preventDefault();
+            verify();
           }}
-        />
-        <button>Submit</button>
-        <div className="link">
-          <Link className="link__item" to="/login">
-            Login
-          </Link>
-        </div>
-      </form>
-    </div>
+        >
+          <input
+            type="text"
+            placeholder="code"
+            onChange={(e) => {
+              setCode(e.target.value);
+            }}
+          />
+          <button>Submit</button>
+          <div className="link">
+            <Link className="link__item" to="/login">
+              Login
+            </Link>
+          </div>
+        </form>
+      </div>
+    </>
   );
 }
 

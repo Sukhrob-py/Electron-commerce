@@ -133,8 +133,11 @@ function Myproducts() {
         <div className="container">
           <div className={`popular myproducts ${noproduct ? "noproduct" : ""}`}>
             <div className="popular__top">
-              <div className="popular__top__left">
+              <div className="popular__top__left myprodtop">
                 <h3 className="popular__title">My products</h3>
+                <div className="add">
+                  <Link className="linkk" to="/addproduct">+ Add</Link>
+                </div>
               </div>
             </div>
             <div className="products">You have not products!</div>

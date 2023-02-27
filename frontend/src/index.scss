@@ -12,3 +12,41 @@
   width: 94%;
   margin: 0 auto;
 }
+
+.error-box {
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 220px;
+  transform: translateX(-50%);
+  background-color: rgb(255, 23, 23);
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  .error-txt {
+    font-weight: 100;
+    font-size: 16px;
+  }
+}
+
+.dblock{
+  display: block;
+}
+
+@media (max-width:900px) {
+  .error-box{
+    top: 170px;
+    .error-txt{
+      font-size: 14px;
+    }
+  }
+}
+@media (max-width:767px) {
+  .error-box{
+    width: 80%;
+    top: 150px;
+    .error-txt{
+      font-size: 14px;
+    }
+  }
+}

@@ -8,6 +8,7 @@ import { GoSearch } from "react-icons/go";
 import { AiOutlineCloseSquare, AiOutlineMenu } from "react-icons/ai";
 import { RxPerson } from "react-icons/rx";
 import { RiShoppingCart2Line } from "react-icons/ri";
+import { MdLogout } from "react-icons/md";
 
 import Logo from "../../../assets/logo.png";
 
@@ -83,6 +84,20 @@ function Nav(props) {
               <div className="nav-bottom-right">
                 <div className="nav-bottom-right__item">
                   <GoSearch className="icon search-icon" />
+                </div>
+                <div
+                  className={`nav-bottom-right__item ${
+                    access ? "dblock" : "dnone"
+                  }`}
+                  onClick={() => {
+                    window.localStorage.clear();
+                    window.location.href = "/login";
+                  }}
+                >
+                  <Link>
+                    <MdLogout className="icon" />
+                    <p className="nav-bottom-right__item">Log out</p>
+                  </Link>
                 </div>
                 <div
                   className={`nav-bottom-right__item ${access ? "dnone" : ""}`}
