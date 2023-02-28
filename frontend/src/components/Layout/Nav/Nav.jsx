@@ -20,6 +20,7 @@ function Nav(props) {
   const [sidelinks, setSidelinks] = useState(false);
   const [search, setSearch] = useState("");
   const [btn, setBtn] = useState(false);
+  const [searchinput, setSearchInput] = useState(false);
   const access = localStorage.getItem("access");
   useEffect(() => {
     const input_search = document.querySelector(".search_input");
@@ -62,10 +63,11 @@ function Nav(props) {
                 </Link>
               </div>
               <form
-                className="search"
+                className={`search ${searchinput ? "formblock" : ""}`}
                 onSubmit={(e) => {
                   e.preventDefault();
                   setBtn(true);
+                  setSearchInput(false);
                   setTimeout(() => {
                     setBtn(false);
                   }, 0);
@@ -82,7 +84,12 @@ function Nav(props) {
                 <button>Search</button>
               </form>
               <div className="nav-bottom-right">
-                <div className="nav-bottom-right__item">
+                <div
+                  className="nav-bottom-right__item"
+                  onClick={() => {
+                    setSearchInput(true);
+                  }}
+                >
                   <GoSearch className="icon search-icon" />
                 </div>
                 <div
@@ -156,15 +163,20 @@ function Nav(props) {
               onClick={() => setSidelinks(!sidelinks)}
             />
           </div>
-          <div className="nav-side-links-items">
+          <div
+            className="nav-side-links-items"
+            onClick={() => {
+              setSidelinks(false);
+            }}
+          >
             <Link className="side-link">
               <FaCartArrowDown className="icon" />
               <p>Your orders</p>
             </Link>
-            <Link className="side-link">
+            <Link className="side-link" to="/">
               <p>Home</p>
             </Link>
-            <Link className="side-link">
+            <Link className="side-link" to="/myproducts">
               <p>My products</p>
             </Link>
             <Link className="side-link">

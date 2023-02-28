@@ -2,6 +2,7 @@ from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveUpdateDe
 from rest_framework import permissions
 from rest_framework.views import APIView
 from django.core.serializers import serialize
+from django.http import JsonResponse
 from rest_framework.response import Response
 import json
 
@@ -19,23 +20,12 @@ class FilterProductsApiView(APIView):
     permission_classes = (permissions.IsAuthenticated,)
 
     def post(self, request):
-        name = request.data.get('name')
-        products = Product.objects.filter(title__contains=name)
-        products_list = []
-        for i in products:
-            prod_dict = {}
-            prod_dict['yuid'] = str(i.yuid)
-            prod_dict['owner'] = i.owner.email
-            prod_dict['category'] = i.category
-            prod_dict['cost'] = i.cost
-            prod_dict['title'] = i.title
-            prod_dict['photo'] = "http://127.0.0.1:8000/media/"+str(i.photo)
-            prod_dict['desc'] = i.desc
-            prod_dict['brand'] = i.brand
-            products_list.append(prod_dict)
-        return Response({
-            'data': json.dumps(products_list)
-        })
+        name = self.request.data.get('name')
+        queryset = Product.objects.filter(
+            title__contains=name).exclude(owner=self.request.user)
+        return JsonResponse(serialize("json", queryset), safe=False)
+
+
 
 
 class QuantityOfCategoryProductsApiView(APIView):
@@ -43,10 +33,12 @@ class QuantityOfCategoryProductsApiView(APIView):
 
     def get(self, request):
         category_quantity = []
-        category_quantity.append({'all': Product.objects.all().count()})
+        category_quantity.append(
+            {'all': Product.objects.all().exclude(owner=request.user).count()})
         for i in CATEGORY:
             quantity_dic = {}
-            quantity = Product.objects.filter(category=i[0]).count()
+            quantity = Product.objects.filter(
+                category=i[0]).exclude(owner=request.user).count()
             quantity_dic[i[0]] = quantity
 
             category_quantity.append(quantity_dic)
@@ -59,26 +51,13 @@ class FilterByCategory(APIView):
     permission_classes = (permissions.IsAuthenticated,)
 
     def post(self, request):
-        category = request.data.get('category')
-        if category == 'all':
-            products = Product.objects.all()
+        category = self.request.data.get('category')
+        if category == "all":
+            queryset = Product.objects.all().exclude(owner=self.request.user)
         else:
-            products = Product.objects.filter(category=category.lower())
-        products_list = []
-        for i in products:
-            prod_dict = {}
-            prod_dict['yuid'] = str(i.yuid)
-            prod_dict['owner'] = i.owner.email
-            prod_dict['category'] = i.category
-            prod_dict['cost'] = i.cost
-            prod_dict['title'] = i.title
-            prod_dict['photo'] = "http://127.0.0.1:8000/media/"+str(i.photo)
-            prod_dict['desc'] = i.desc
-            prod_dict['brand'] = i.brand
-            products_list.append(prod_dict)
-        return Response({
-            'data': json.dumps(products_list)
-        })
+            queryset = Product.objects.filter(
+                category=category).exclude(owner=self.request.user)
+        return JsonResponse(serialize("json", queryset), safe=False)
 
 
 class FilterByBrandApiView(APIView):
@@ -93,16 +72,20 @@ class FilterByBrandApiView(APIView):
         })
 
 
-class ProductListApiView(ListAPIView):
+class ProductListApiView(APIView):
     permission_classes = (permissions.IsAuthenticated,)
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
+
+    def get(self, request):
+        queryset = Product.objects.all().exclude(owner=self.request.user)
+        return JsonResponse(serialize("json", queryset), safe=False)
 
 
 class PopularProductsListApiView(ListAPIView):
     permission_classes = (permissions.IsAuthenticated,)
-    queryset = Product.objects.all()[:20]
-    serializer_class = ProductSerializer
+
+    def get(self, request):
+        queryset = Product.objects.all().exclude(owner=self.request.user)[:20]
+        return JsonResponse(serialize("json", queryset), safe=False)
 
 
 class ProductDetailApiView(RetrieveAPIView):
@@ -137,9 +120,6 @@ class MyProductsDetailApiView(RetrieveUpdateDestroyAPIView):
         return queryset
 
     def put(self, request, *args, **kwargs):
-        print("-----------------")
-        print(request.data)
-        print("---------+++++++++")
         updated = super().put(request, *args, **kwargs)
         return Response({
             "updated": True

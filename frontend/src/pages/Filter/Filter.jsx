@@ -14,6 +14,7 @@ import "./filter.scss";
 function Filter() {
   const [products, setProducts] = useState("");
   const [quantity, setQuantity] = useState("");
+  const [addedcart, setAddedCart] = useState(false);
   let { search, btn } = useContext(SearchContext);
   const API = "http://127.0.0.1:8000/products/products/";
   const API2 = "http://127.0.0.1:8000/products/filter_category/";
@@ -28,7 +29,7 @@ function Filter() {
     });
     const data = await res.json();
     if (res.status == 200 && data) {
-      setProducts(data);
+      setProducts(JSON.parse(data));
     } else if (res.status == 401) {
       window.location.href = "/login";
     }
@@ -62,10 +63,8 @@ function Filter() {
       }),
     });
     const data = await res.json();
-    console.log(data);
-    console.log(res);
     if (res.status == 201) {
-      window.alert("product added to cart!");
+      console.log();
     } else if (res.status == 401) {
       window.localStorage.href = "/login";
     } else {
@@ -86,7 +85,7 @@ function Filter() {
     });
     const data = await res.json();
     if (res.status == 200) {
-      setProducts(JSON.parse(data.data));
+      setProducts(JSON.parse(data));
     } else if (res.status == 401) {
       window.localStorage.href = "/login";
     } else {
@@ -107,7 +106,7 @@ function Filter() {
     });
     const data = await res.json();
     if (res.status == 200 && data) {
-      setProducts(JSON.parse(data.data));
+      setProducts(JSON.parse(data));
     } else if (res.status == 401) {
       window.location.href = "/login";
     }
@@ -122,6 +121,9 @@ function Filter() {
   if (products && products.length > 0 && quantity) {
     return (
       <div className="container">
+        <div className={`added-category-box ${addedcart ? "" : "dnone"}`}>
+          <p>Product added to cart!</p>
+        </div>
         <div className="filter">
           <div className="sidebar">
             <div className="by-category">
@@ -178,14 +180,19 @@ function Filter() {
             >
               {products.map((prod) => {
                 return (
-                  <SwiperSlide className="swiper-slide2" key={prod.yuid}>
+                  <SwiperSlide className="swiper-slide2" key={prod.fields.yuid}>
                     <div className="product">
                       <div className="img">
-                        <img src={prod.photo} alt="" />
+                        <img
+                          src={
+                            "http://127.0.0.1:8000/media/" + prod.fields.photo
+                          }
+                          alt=""
+                        />
                       </div>
-                      <h4 className="title">{prod.title}</h4>
+                      <h4 className="title">{prod.fields.title}</h4>
                       <p className="cost">
-                        $ <span>{prod.cost}</span>
+                        $ <span>{prod.fields.cost}</span>
                       </p>
                       <div className="product__links">
                         <Link
@@ -193,13 +200,20 @@ function Filter() {
                           onClick={() => {
                             addcart(
                               "http://127.0.0.1:8000/cart/create/",
-                              prod.yuid
+                              prod.fields.yuid
                             );
+                            setAddedCart(true);
+                            setTimeout(() => {
+                              setAddedCart(false);
+                            }, 1500);
                           }}
                         >
                           Add to cart <BsFillCartPlusFill className="icon" />
                         </Link>
-                        <Link className="viewmore" to={`/detail/${prod.yuid}`}>
+                        <Link
+                          className="viewmore"
+                          to={`/detail/${prod.fields.yuid}`}
+                        >
                           <SlEye className="icon" />
                         </Link>
                       </div>
@@ -212,7 +226,7 @@ function Filter() {
         </div>
       </div>
     );
-  } else if (products && products.length == 0 && quantity) {
+  } else if (quantity) {
     return (
       <div className="container">
         <div className="filter">

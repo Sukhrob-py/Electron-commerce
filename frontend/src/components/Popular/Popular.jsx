@@ -25,7 +25,7 @@ function Popular() {
     });
     const data = await res.json();
     if (res.status == 200 && data) {
-      setProducts(data);
+      setProducts(JSON.parse(data));
     } else if (res.status == 401) {
       window.location.href = "/login";
     }
@@ -67,7 +67,7 @@ function Popular() {
     });
     const data = await res.json();
     if (res.status == 200 && data) {
-      setProducts(JSON.parse(data.data));
+      setProducts(JSON.parse(data));
     } else if (res.status == 401) {
       window.location.href = "/login";
     }
@@ -78,21 +78,13 @@ function Popular() {
   useEffect(() => {
     popular_products(API);
   }, []);
-  if (products) {
+  if (products && products.length > 0) {
     return (
       <div className="container">
         <div className="popular">
           <div className="popular__top">
             <div className="popular__top__left">
               <h3 className="popular__title">Popular products</h3>
-            </div>
-            <div className="popular__top__right">
-              <div className="categories">
-                <button>Cameras</button>
-                <button>Laptops</button>
-                <button>Phones</button>
-                <button>Tablets</button>
-              </div>
             </div>
           </div>
           <div className="products">
@@ -125,14 +117,19 @@ function Popular() {
             >
               {products.map((prod) => {
                 return (
-                  <SwiperSlide className="swiper-slide2" key={prod.yuid}>
+                  <SwiperSlide className="swiper-slide2" key={prod.fields.yuid}>
                     <div className="product">
                       <div className="img">
-                        <img src={prod.photo} alt="" />
+                        <img
+                          src={
+                            "http://127.0.0.1:8000/media/" + prod.fields.photo
+                          }
+                          alt=""
+                        />
                       </div>
-                      <h4 className="title">{prod.title}</h4>
+                      <h4 className="title">{prod.fields.title}</h4>
                       <p className="cost">
-                        $ <span>{prod.cost}</span>
+                        $ <span>{prod.fields.cost}</span>
                       </p>
                       <div className="product__links">
                         <Link
@@ -140,13 +137,16 @@ function Popular() {
                           onClick={() => {
                             addcart(
                               "http://127.0.0.1:8000/cart/create/",
-                              prod.yuid
+                              prod.fields.yuid
                             );
                           }}
                         >
                           Add to cart <BsFillCartPlusFill className="icon" />
                         </Link>
-                        <Link className="viewmore" to={`detail/${prod.yuid}`}>
+                        <Link
+                          className="viewmore"
+                          to={`detail/${prod.fields.yuid}`}
+                        >
                           <SlEye className="icon" />
                         </Link>
                       </div>
@@ -159,7 +159,7 @@ function Popular() {
         </div>
       </div>
     );
-  } else {
+  } else if (products && products.length == 0) {
     return (
       <div className="container">
         <div className="popular">
@@ -167,13 +167,20 @@ function Popular() {
             <div className="popular__top__left">
               <h3 className="popular__title">Popular products</h3>
             </div>
-            <div className="popular__top__right">
-              <div className="categories">
-                <button>Cameras</button>
-                <button>Laptops</button>
-                <button>Phones</button>
-                <button>Tablets</button>
-              </div>
+          </div>
+          <div className="products">
+            <h2>No products</h2>
+          </div>
+        </div>
+      </div>
+    );
+  } else {
+    return (
+      <div className="container">
+        <div className="popular">
+          <div className="popular__top">
+            <div className="popular__top__left">
+              <h3 className="popular__title">Popular products</h3>
             </div>
           </div>
           <div className="products">

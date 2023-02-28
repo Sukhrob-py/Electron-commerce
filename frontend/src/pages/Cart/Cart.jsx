@@ -18,8 +18,6 @@ function Cart() {
       },
     });
     const data = await res.json();
-    console.log(data);
-    console.log(res);
     if (res.status == 200 && data) {
       setProducts(JSON.parse(data.data));
       if (data.length == 0) {
@@ -87,7 +85,6 @@ function Cart() {
             </div>
             <div className="products__list">
               {products.map((cart_item) => {
-                console.log("http://127.0.0.1:8000/media/" + cart_item.photo);
                 const cost = +(
                   +cart_item.quantity * parseFloat(cart_item.cost)
                 ).toFixed(2);

@@ -8,6 +8,7 @@ function Detail() {
   const { yuid } = useParams();
   const [quantity, setQuantity] = useState(1);
   const [product, setProduct] = useState("");
+  const [addedcart, setAddedCart] = useState(false);
   const API = `http://127.0.0.1:8000/products/products/${yuid}`;
   const get_product = async (API) => {
     const res = await fetch(API, {
@@ -39,11 +40,8 @@ function Detail() {
       }),
     });
     const data = await res.json();
-    console.log(data);
-    console.log(res);
     if (res.status == 201) {
-      window.alert("product added to cart!");
-      window.location.href = "/";
+      console.log();
     } else if (res.status == 401) {
       window.localStorage.href = "/login";
     } else {
@@ -57,6 +55,9 @@ function Detail() {
   if (product) {
     return (
       <div className="container">
+        <div className={`added-category-box ${addedcart ? "" : "dnone"}`}>
+          <p>Product added to cart!</p>
+        </div>
         <div className="detail">
           <div className="product__info">
             <div className="detail__img">
@@ -101,6 +102,10 @@ function Detail() {
                 <button
                   onClick={() => {
                     addcart("http://127.0.0.1:8000/cart/create/");
+                    setAddedCart(true);
+                    setTimeout(() => {
+                      setAddedCart(false);
+                    }, 1500);
                   }}
                 >
                   Add to cart
